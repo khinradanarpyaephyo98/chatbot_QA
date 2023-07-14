@@ -27,7 +27,17 @@ os.environ["HUGGINGFACEHUB_API_TOKEN"] ="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"
 llm=HuggingFaceHub(repo_id="google/flan-t5-large", model_kwargs={"temperature":0, "max_length":512})
 chain = load_qa_chain(llm, chain_type="stuff")
 
-query=input("Write the query you want to ask :  ")
-docs = db.similarity_search(query)
-print("Answer :",chain.run(input_documents=docs, question=query))
+while True:
+    query = input("Enter Question (or 'quit' to exit): ")
+    if query.lower() == "quit":
+        break
+    else:
+        docs = db.similarity_search(query)
+        print("Answer :",chain.run(input_documents=docs, question=query),"\n")
+
+    
+
+
+    
+
 
